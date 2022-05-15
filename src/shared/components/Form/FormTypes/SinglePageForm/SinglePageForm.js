@@ -8,9 +8,9 @@ import {
   toFormInputs,
   toInputInstance,
   toIconButtons,
-  getLoadingLayout,
+  getSingleFormLoadingLayout,
   FORM_TYPES as FORM_TYPES_UTILS,
-} from "./formUtils";
+} from "../../utils/formUtils";
 
 const defualtTheme = {
   primaryForegroundColor: "#C60017",
@@ -55,14 +55,13 @@ const SinglePageForm = ({
     }
   };
 
-  const loadingLayout = getLoadingLayout(inputInstances);
+  const loadingLayout = getSingleFormLoadingLayout(inputInstances);
   console.log(isLoading);
   return (
     <SkeletonContent
       containerStyle={{ flex: 1 }}
       isLoading={isLoading}
       duration={1000}
-      animationType="pulse"
       boneColor={theme.secondaryBackgroundColor}
       highlightColor={theme.primaryBackgroundColor}
       layout={loadingLayout}

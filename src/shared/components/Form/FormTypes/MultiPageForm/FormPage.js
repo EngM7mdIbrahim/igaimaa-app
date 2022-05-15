@@ -8,18 +8,13 @@ import {
   toFormInputs,
   toInputInstance,
   toIconButtons,
-  getLoadingLayout,
+  getSingleFormLoadingLayout,
   FORM_TYPES as FORM_TYPES_UTILS,
-} from "./formUtils";
-
-const defualtTheme = {
-  primaryForegroundColor: "#C60017",
-};
+  SCROLL_TO as SCROLL_TO_UTILS,
+} from "../../utils/formUtils";
 
 //const scroll functions
-export const SCROLL_TO = (scroll) => {
-  return (reactNode) => scroll.props.scrollToFocusedInput(reactNode);
-};
+export const SCROLL_TO = SCROLL_TO_UTILS;
 export const FORM_TYPES = FORM_TYPES_UTILS;
 
 //InitFormObjectParser
@@ -27,15 +22,17 @@ const initSingPageFormInst = {
   inputInstances: [],
   buttonText: "No Button found for this form!",
   title: "No Title found for this form!",
+  subtitle: "No subtitle for this form!",
   isLoading: false,
   onInputFocus: () => {},
-  onFormSubmit: ()=>{}
+  onFormSubmit: () => {},
 };
 
-const SinglePageForm = ({
+const FormPage = ({
   inputInstances = initSingPageFormInst.inputInstances,
   buttonText = initSingPageFormInst.buttonText,
   onFormSubmit = initSingPageFormInst.onFormSubmit,
+  subtitle = initSingPageFormInst.subtitle,
   theme,
   title = initSingPageFormInst.title,
   isLoading = initSingPageFormInst.isLoading,
@@ -50,12 +47,10 @@ const SinglePageForm = ({
     let state = toExportState(formState);
     if (onFormSubmit) {
       onFormSubmit(state);
-    } else {
-      ONFORM_SUBMIT_EMPTY(state);
     }
   };
 
-  const loadingLayout = getLoadingLayout(inputInstances);
+  const loadingLayout = getSingleFormLoadingLayout(inputInstances);
   console.log(isLoading);
   return (
     <SkeletonContent
@@ -68,9 +63,14 @@ const SinglePageForm = ({
       layout={loadingLayout}
     >
       <Text
-        style={{ ...styles.textStyle, color: theme.primaryForegroundColor }}
+        style={{ ...styles.titleStyle, color: theme.primaryForegroundColor }}
       >
         {title}
+      </Text>
+      <Text
+        style={{ ...styles.subTitleStyle, color: theme.primaryForegroundColor }}
+      >
+        {subtitle}
       </Text>
       <View>
         {inputInstances.map((item) => {
@@ -99,17 +99,18 @@ const SinglePageForm = ({
   );
 };
 
-//DEFAULT FUNCTIONS
-const ONFORM_SUBMIT_EMPTY = (_) => {
-  console.error("OnFormSubmit is not initialized for this form!");
-};
-
 const styles = StyleSheet.create({
-  textStyle: {
+  titleStyle: {
     margin: 20,
-    fontSize: 40,
+    fontSize: 50,
+    textAlign: "center",
     fontWeight: "bold",
+  },
+  subTitleStyle: {
+    marginVertical: 20,
+    fontSize: 16,
+    textAlign: "center",
   },
 });
 
-export default SinglePageForm;
+export default FormPage;

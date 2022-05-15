@@ -1,14 +1,17 @@
 import React from "react";
 import { View } from "react-native";
-import IconButton from "../../../IconButton/IconButton";
+import IconButton from "../../IconButton/IconButton";
 import InputField, {
   initInputInstance,
-} from "../../UIElements/Input Field/InputField";
+} from "../UIElements/Input Field/InputField";
 
 export const FORM_TYPES = {
   text: "text",
   buttons: "stack of buttons",
   iconButton: "iconButton",
+};
+export const SCROLL_TO = (scroll) => {
+  return (reactNode) => scroll.props.scrollToFocusedInput(reactNode);
 };
 
 export const toFormInputs = (inputInstances) => {
@@ -90,7 +93,7 @@ export const toIconButtons = ({ items }) => {
   );
 };
 
-export const getLoadingLayout = (inputs) => {
+export const getSingleFormLoadingLayout = (inputs) => {
   title = [{ key: "title", width: 230, height: 70, margin: 15 }];
   inputsLayout = inputs.map((input) => {
     switch (input.type) {

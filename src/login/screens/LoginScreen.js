@@ -1,17 +1,21 @@
 //Main imports
 import React from "react";
-import { Text,StyleSheet, Image } from "react-native";
+import { Text, StyleSheet, Image } from "react-native";
 
 //AppSkeleton
 import { getTheme } from "../../shared/theme/theme";
 import { getImage } from "../../shared/assetsConstants/images";
+import { appStringskeys, getString } from "../../shared/strings/strings";
 
 //hooks and utils
 import { useSelector } from "react-redux";
 import { VALIDATOR_REQUIRE } from "../../shared/components/Form/utils/validators";
 
 //components
-import SinglePageForm, {FORM_TYPES,SCROLL_TO} from '../../shared/components/Form/FormTypes/SinglePageForm/SinglePageForm'
+import SinglePageForm, {
+  FORM_TYPES,
+  SCROLL_TO,
+} from "../../shared/components/Form/FormTypes/SinglePageForm/SinglePageForm";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import ButtonField from "../../shared/components/Button/ButtonField";
 import { MODAL_PARAMS } from "../../modal/ModalScreen";
@@ -19,6 +23,7 @@ import { MODAL_PARAMS } from "../../modal/ModalScreen";
 //icons
 import { EvilIcons } from "@expo/vector-icons";
 import { FontAwesome } from "@expo/vector-icons";
+import SignupScreen from "../../signup/SignupScreen";
 
 //Keyboard Scroll View Attributes
 let scroll = null;
@@ -30,20 +35,33 @@ const LoginScreen = ({ navigation }) => {
   const isBlack = useSelector((state) => state.user.isBlack);
   const theme = getTheme(isBlack);
   const images = getImage();
+  const language = useSelector((state) => state.user.language);
   const formInputs = [
     {
       type: FORM_TYPES.text,
-      title: "Username",
+      title: getString(
+        language,
+        appStringskeys.loginScreen_usernamePlaceholderText
+      ),
       validators: [VALIDATOR_REQUIRE()],
-      errorMessage: "Please enter a valid username!",
+      errorMessage: getString(
+        language,
+        appStringskeys.loginScreen_usernameErrorMessage
+      ),
       icon: <FontAwesome name="user" />,
     },
     {
       type: FORM_TYPES.text,
-      title: "Password",
+      title: getString(
+        language,
+        appStringskeys.loginScreen_passwordPlaceholderText
+      ),
       isPassword: true,
       validators: [VALIDATOR_REQUIRE()],
-      errorMessage: "Please enter a valid username!",
+      errorMessage: getString(
+        language,
+        appStringskeys.loginScreen_passwordErrorMessage
+      ),
       icon: <FontAwesome name="lock" />,
     },
     {
@@ -89,33 +107,48 @@ const LoginScreen = ({ navigation }) => {
       />
       <ButtonField
         isInline={true}
-        text="Don't have an account? Sign up!"
+        text={getString(language, appStringskeys.loginScreen_signupText)}
         style={{ alignSelf: "flex-end" }}
         onClick={() =>
           navigation.push("ModalScreen", {
-            [MODAL_PARAMS.child]:<Text>Hello World</Text>,
-            [MODAL_PARAMS.buttonLeft]:{
-              [MODAL_PARAMS.buttonText]: 'Cancel',
-              [MODAL_PARAMS.buttonOnClick]: ()=>{navigation.pop();}
+            [MODAL_PARAMS.child]: <SignupScreen />,
+            [MODAL_PARAMS.buttonLeft]: {
+              [MODAL_PARAMS.buttonText]: getString(language, appStringskeys.signupScreen_modal_leftButtonText),
+              [MODAL_PARAMS.buttonOnClick]: () => {
+                navigation.pop();
+              },
             },
-            [MODAL_PARAMS.buttonRight]:{
-              [MODAL_PARAMS.buttonText]: 'Next',
-              [MODAL_PARAMS.buttonOnClick]: ()=>{navigation.pop();}
+            [MODAL_PARAMS.buttonRight]: {
+              [MODAL_PARAMS.buttonText]: getString(language, appStringskeys.signupScreen_modal_rightButtonText),
+              [MODAL_PARAMS.buttonOnClick]: () => {
+                navigation.pop();
+              },
             },
-            [MODAL_PARAMS.title]: 'Sign up'
+            [MODAL_PARAMS.title]: getString(language, appStringskeys.signupScreen_modal_titleText),
           })
         }
       />
       <SinglePageForm
         inputInstances={formInputs}
         theme={theme}
-        title="Login"
-        buttonText="Login"
+        title={getString(language, appStringskeys.loginScreen_loginText)}
+        buttonText={getString(
+          language,
+          appStringskeys.loginScreen_loginButtonText
+        )}
         onInputFoucs={SCROLL_TO(scroll)}
+        isLoading={false}
         onFormSubmit={(state) => console.log(state)}
       />
-     
-      <ButtonField isInline={true} isDanger={true} text="Forgot Password?" />
+
+      <ButtonField
+        isInline={true}
+        isDanger={true}
+        text={getString(
+          language,
+          appStringskeys.loginScreen_forgetPasswordButtonText
+        )}
+      />
     </KeyboardAwareScrollView>
   );
 };

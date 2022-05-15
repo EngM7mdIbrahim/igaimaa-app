@@ -1,10 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { supportedLanguages } from "../../../strings/strings";
 
 export const userSlice = createSlice({
   name: "user",
   initialState: {
     name: "Test User",
     isBlack: true,
+    language: supportedLanguages.arabic
   },
   reducers: {
     switchTheme: (state) => {
@@ -15,11 +17,15 @@ export const userSlice = createSlice({
     },
     setWhite: (state)=>{
       return {...state, isBlack: false}
+    },
+
+    changeLanguage: (state, language)=>{
+      return {...state, language}
     }
 
   },
 });
 
-export const { switchTheme,setBlack,setWhite } = userSlice.actions;
+export const { switchTheme,setBlack,setWhite, changeLanguage } = userSlice.actions;
 
 export default userSlice.reducer;
