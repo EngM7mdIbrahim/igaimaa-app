@@ -6,7 +6,7 @@ import useForm, { isFormValid } from "../../hooks/useForm";
 import {
   toExportState,
   toFormInputs,
-  toInputInstance,
+  toLabelledInputInstance,
   toIconButtons,
   getSingleFormLoadingLayout,
   FORM_TYPES as FORM_TYPES_UTILS,
@@ -23,6 +23,7 @@ const initSingPageFormInst = {
   buttonText: "No Button found for this form!",
   title: "No Title found for this form!",
   subtitle: "No subtitle for this form!",
+  hint: 'No hint found for this form page!',
   isLoading: false,
   onInputFocus: () => {},
   onFormSubmit: () => {},
@@ -34,6 +35,7 @@ const FormPage = ({
   onFormSubmit = initSingPageFormInst.onFormSubmit,
   subtitle = initSingPageFormInst.subtitle,
   theme,
+  hint = initSingPageFormInst.hint,
   title = initSingPageFormInst.title,
   isLoading = initSingPageFormInst.isLoading,
   onInputFocus = initSingPageFormInst.onInputFocus,
@@ -73,10 +75,12 @@ const FormPage = ({
         {subtitle}
       </Text>
       <View>
-        {inputInstances.map((item) => {
+        {inputInstances.map((item, index) => {
           switch (item.type) {
             case FORM_TYPES.text:
-              return toInputInstance(
+              return toLabelledInputInstance(
+                index,
+                inputInstances.length,
                 item,
                 theme,
                 onInputFocus,
@@ -86,6 +90,11 @@ const FormPage = ({
               return toIconButtons(item, theme);
           }
         })}
+      </View>
+      <View style={{...styles.hintContainerStyle, backgroundColor: theme.secondaryBackgroundColor}}>
+        <Text style={{...styles.hintTextStyle, color: theme.placeholderColor}}>
+          {hint}
+        </Text>
       </View>
       <ButtonField
         disabled={!formState.isValid}
@@ -102,7 +111,7 @@ const FormPage = ({
 const styles = StyleSheet.create({
   titleStyle: {
     margin: 20,
-    fontSize: 50,
+    fontSize: 40,
     textAlign: "center",
     fontWeight: "bold",
   },
@@ -111,6 +120,16 @@ const styles = StyleSheet.create({
     fontSize: 16,
     textAlign: "center",
   },
+  hintContainerStyle:{
+    margin: 15,
+    borderRadius: 7
+  },
+  hintTextStyle:{
+    marginVertical: 20,
+    marginHorizontal:10,
+    textAlign: "center",
+    fontSize: 14
+  }
 });
 
 export default FormPage;

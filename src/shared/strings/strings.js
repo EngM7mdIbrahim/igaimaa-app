@@ -21,7 +21,14 @@ export const appStringskeys = {
     signupScreen_modal_rightButtonText: 'signupScreen_modal_rightButtonText',
     signupScreen_modal_leftButtonText: 'signupScreen_modal_leftButtonText',
     signupScreen_form_page1_titleText: 'signupScreen_form_page1_titleText',
-    signupScreen_form_page1_subTitleText: 'signupScreen_form_page1_subTitleText'
+    signupScreen_form_page1_subTitleText: 'signupScreen_form_page1_subTitleText',
+    signupScreen_form_page1_usernameInputLabelText: 'signupScreen_form_page1_usernameInputLabelText',
+    signupScreen_form_page1_usernameInputLabelPlaceHolder: 'signupScreen_form_page1_usernameInputLabelPlaceHolder',
+    signupScreen_form_page1_usernameInputLabelErrorMessage: 'signupScreen_form_page1_usernameInputLabelPlaceHolder',
+    signupScreen_form_page1_passwordInputLabelText: 'signupScreen_form_page1_passwordInputLabelText',
+    signupScreen_form_page1_passwordInputLabelPlaceHolder: 'signupScreen_form_page1_passwordInputLabelPlaceHolder',
+    signupScreen_form_page1_passwordInputLabelErrorMessage: 'signupScreen_form_page1_passwordInputLabelErrorMessage'
+
 }
 
 

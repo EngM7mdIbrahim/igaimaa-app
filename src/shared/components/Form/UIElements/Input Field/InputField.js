@@ -16,7 +16,7 @@ export const initInputInstance = {
   errorMessage: "This is input doesn't have error message",
   icon: undefined,
   style: {},
-  onInputChange: ()=>{console.error('No on input change for this input field!')},
+  onInputChange: ()=>{console.error('No on input change handler for this input field!')},
   onFocus: ()=>{console.error('No on focus for this input field!')}
 };
 

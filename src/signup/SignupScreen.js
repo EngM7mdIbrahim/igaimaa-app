@@ -12,7 +12,6 @@ import { VALIDATOR_REQUIRE } from "../shared/components/Form/utils/validators";
 
 //components
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
-import { MODAL_PARAMS } from "../modal/ModalScreen";
 import {FORM_TYPES} from '../shared/components/Form/FormTypes/MultiPageForm/FormPage';
 import FormPage, {SCROLL_TO} from "../shared/components/Form/FormTypes/MultiPageForm/FormPage";
 
@@ -23,8 +22,6 @@ import { FontAwesome } from "@expo/vector-icons";
 //Keyboard Scroll View Attributes
 let scroll = null;
 
-//Modal View
-let modal = null;
 
 const SignupScreen = ({ navigation }) => {
   const isBlack = useSelector((state) => state.user.isBlack);
@@ -34,41 +31,22 @@ const SignupScreen = ({ navigation }) => {
     {
       type: FORM_TYPES.text,
       title: "Username",
+      isLabeled: true,
+      placeholder: 'Enter a username',
       validators: [VALIDATOR_REQUIRE()],
       errorMessage: "Please enter a valid username!",
-      icon: <FontAwesome name="user" />,
     },
     {
       type: FORM_TYPES.text,
       title: "Password",
       isPassword: true,
+      isLabeled: true,
+      placeholder: 'Enter a password',
       validators: [VALIDATOR_REQUIRE()],
-      errorMessage: "Please enter a valid username!",
+      errorMessage: "Please enter a valid password!",
       icon: <FontAwesome name="lock" />,
     },
-    {
-      type: FORM_TYPES.buttons,
-      items: [
-        {
-          icon: <EvilIcons name="sc-facebook" />,
-          color: "#3b5998",
-          disabled: false,
-          isInline: false,
-          onClick: () => {
-            console.log("Facebook button is pressed!");
-          },
-        },
-        {
-          icon: <FontAwesome name="google" />,
-          color: "#c60017",
-          disabled: false,
-          isInline: false,
-          onClick: () => {
-            console.log("Google button is pressed!");
-          },
-        },
-      ],
-    },
+   
   ];
   return (
     <KeyboardAwareScrollView
@@ -88,6 +66,7 @@ const SignupScreen = ({ navigation }) => {
         subtitle={getString(language, appStringskeys.signupScreen_form_page1_subTitleText)}
         onInputFoucs={SCROLL_TO(scroll)}
         isLoading={false}
+        hint="Hello world"
         onFormSubmit={(state) => console.log(state)}
       />
     </KeyboardAwareScrollView>

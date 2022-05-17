@@ -13,5 +13,11 @@ export default english = {
     signupScreen_modal_rightButtonText: 'Next',
     signupScreen_modal_leftButtonText: 'Cancel',
     signupScreen_form_page1_titleText: 'Enter your credentials',
-    signupScreen_form_page1_subTitleText: 'Enter a valid username and password'
+    signupScreen_form_page1_subTitleText: 'Enter a valid username and password',
+    signupScreen_form_page1_usernameInputLabelText: 'signupScreen_form_page1_usernameInputLabelText',
+    signupScreen_form_page1_usernameInputLabelPlaceHolder: 'signupScreen_form_page1_usernameInputLabelPlaceHolder',
+    signupScreen_form_page1_usernameInputLabelErrorMessage: 'signupScreen_form_page1_usernameInputLabelPlaceHolder',
+    signupScreen_form_page1_passwordInputLabelText: 'signupScreen_form_page1_passwordInputLabelText',
+    signupScreen_form_page1_passwordInputLabelPlaceHolder: 'signupScreen_form_page1_passwordInputLabelPlaceHolder',
+    signupScreen_form_page1_passwordInputLabelErrorMessage: 'signupScreen_form_page1_passwordInputLabelErrorMessage'
 }

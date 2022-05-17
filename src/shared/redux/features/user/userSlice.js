@@ -6,7 +6,8 @@ export const userSlice = createSlice({
   initialState: {
     name: "Test User",
     isBlack: true,
-    language: supportedLanguages.arabic
+    language: supportedLanguages.engish
+
   },
   reducers: {
     switchTheme: (state) => {
